@@ -8,26 +8,18 @@ const initState = {
 export const reducer=(state = initState,{type,payload})=>{
     switch(type){
         case REMOVE_ITEM:
-            return {
-                ...state,
-                sales:payload
-            }
-        case REMOVE_CALL:
-            return {
-                ...state,
-                callHub:payload
-            }
         case ADD_ITEM:
             return {
                 ...state,
                 sales:payload
             }
+        case REMOVE_CALL:
         case ADD_CALL:
             return {
                 ...state,
                 callHub:payload
             }
-  
+
         default:
             return state
     }
