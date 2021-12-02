@@ -1,23 +1,83 @@
-import logo from './logo.svg';
+// import logo from './logo.svg';
+import { useEffect, useState } from 'react';
 import './App.css';
+import {v4 as uuid} from "uuid"
+import FieldBox from "./Components/FieldBox";
+import { removeItem } from './Redux/actions';
+import { useDispatch } from 'react-redux';
+import ListData from './Components/ListData';
 
 function App() {
+  const [size, setSize] = useState([]);
+  const [showData, setShowData] = useState([]);
+  // console.log('showData:', showData)
+  const dispatch = useDispatch();  
+  // console.log('size:', size);
+
+  useEffect(() => {
+    setSize([uuid()]);
+  }, []);
+
+  const [salesData, setSalesData] = useState({});
+  // console.log('salesData:', salesData)
+  const [callData, setCallData] = useState({});
+  // console.log('callData:', callData)
+
+  const handleData = (e, type) => {
+    let { value, name } = e.target;
+    if (type === "sales") {
+      setSalesData({ ...salesData, [name]: value });
+    }
+    else {
+      setCallData({ ...callData, [name]: value });
+    }
+  }
+
+  const handleDelete = (name) => {
+    let newData = size.filter((el) => el !== name);
+    console.log('newData:', newData)
+    setSize(newData);
+    dispatch(removeItem(newData));
+
+    const newSales = { ...salesData };
+    delete newSales[name];
+    setSalesData(newSales)
+
+    const newCall = { ...callData }
+    delete newCall[name];
+    setCallData(newCall);
+  }
+
+  const handleSubmit = () => {
+    let arr=[]
+    for (let key in salesData) {
+      let payload = [salesData[key], callData[key]];
+      arr.push(payload);
+    }
+    setShowData(arr);
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="container">
+      <div className="titles">
+        <h3>Salesforce fields</h3>
+        <h3>Callhub fields</h3>
+      </div>
+        {size.map((el, i) => {
+          return (
+            <FieldBox
+              key={i+"box"}
+              handleData={handleData}
+              handleDelete={handleDelete}
+              name={el}
+            />
+          );
+        })}
+        <button onClick={()=>{setSize(prev=>[...prev,prev[prev.length-1]+1])}}>Add</button>
+      </div>
+      <button onClick={handleSubmit} className="submit">Submit</button>
+      <ListData showData={showData}/>
     </div>
   );
 }
