@@ -5,7 +5,7 @@ function Sales({ name, item, sales, handleSales }) {
     return (
         <div>
             <select onChange={handleSales} name={name} id="sales">
-                <option defaultValue>
+                <option>
                     {item ? item : "Choose an option"}
                 </option>
                 {sales.map((item,i) => (

@@ -64,17 +64,17 @@ function App() {
         <h3>Salesforce fields</h3>
         <h3>Callhub fields</h3>
       </div>
-        {size.map((el, i) => {
+        {size.map((el) => {
           return (
             <FieldBox
-              key={i+"box"}
+              key={el}
               handleData={handleData}
               handleDelete={handleDelete}
               name={el}
             />
           );
         })}
-        <button onClick={()=>{setSize(prev=>[...prev,prev[prev.length-1]+1])}}>Add</button>
+        <button onClick={()=>{setSize(prev=>[...prev,uuid()])}}>Add</button>
       </div>
       <button onClick={handleSubmit} className="submit">Submit</button>
       <ListData showData={showData}/>

@@ -3,7 +3,7 @@ function CallHub({ name, item, callHub, handleCallHub }) {
   return (
       <div>
           <select onChange={handleCallHub} name={name} id="callhub">
-              <option defaultValue>
+              <option>
                   {item ? item : "Choose an option"}
               </option>
               {callHub.map((item) => (

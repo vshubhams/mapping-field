@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import { addCall, addItem, removeCall, removeItem } from "../Redux/actions";
 
 export default function FieldBox({ handleData, name,handleDelete }) {
+console.log('name:', name)
 
   const [salesItem, setSalesItem] = useState(null);
   const [callItem, setCallItem] = useState(null);
@@ -34,8 +35,8 @@ export default function FieldBox({ handleData, name,handleDelete }) {
 
   const handleAddAfterDelete = () => {
     handleDelete(name);
-    dispatch(addItem( [salesItem, ...sales]));
-    dispatch(addCall([callItem, ...callHub]));
+    salesItem && dispatch(addItem( [salesItem, ...sales]));
+    callItem && dispatch(addCall([callItem, ...callHub]));
   }
 
   return (

@@ -1,4 +1,4 @@
-
+import {v4 as uuid} from "uuid"
 function ListData({ showData }) {
     
     return (
@@ -8,7 +8,7 @@ function ListData({ showData }) {
                 <h4>CallHub data</h4>
             </div>
             {showData.map((item => (
-                <div key={item[0]+item[1]} className="listItem">
+                <div key={uuid()} className="listItem">
                     <div>{item[0]}</div>
                     <div>{item[1]}</div>
                 </div>
