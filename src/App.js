@@ -3,15 +3,12 @@ import { useEffect, useState } from 'react';
 import './App.css';
 import {v4 as uuid} from "uuid"
 import FieldBox from "./Components/FieldBox";
-import { removeItem } from './Redux/actions';
-import { useDispatch } from 'react-redux';
 import ListData from './Components/ListData';
 
 function App() {
   const [size, setSize] = useState([]);
   const [showData, setShowData] = useState([]);
   // console.log('showData:', showData)
-  const dispatch = useDispatch();  
   // console.log('size:', size);
 
   useEffect(() => {
