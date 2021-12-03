@@ -37,7 +37,6 @@ function App() {
     let newData = size.filter((el) => el !== name);
     console.log('newData:', newData)
     setSize(newData);
-    dispatch(removeItem(newData));
 
     const newSales = { ...salesData };
     delete newSales[name];
